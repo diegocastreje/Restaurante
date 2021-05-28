@@ -1,0 +1,21 @@
+<nav class="navbar navbar-expand-lg navbar-dark" style="background: #1b1717;">
+  <div class="container-fluid">
+    <p class="text-white my-2 fs-3 fw-bolder">
+      {{ title }}
+    </p>
+    <ul class="navbar-nav navbar-right">
+      <!-- Cuando se implemente la seguridad
+      <li *ngIf="!authService.isAuthenticated()">
+      -->
+      <li>
+        <a routerLink="/login" class="btn btn-outline-danger" href="#">Inicia sesión</a>
+      </li>
+      <!-- Cuando se implemente la seguridad
+      <li *ngIf="authService.isAuthenticated()" class="text-white">
+        {{ authService.usuario.username }}
+        <a (click)="logout()" class="btn btn-danger" type="submit">Sign Out</a>
+      </li>
+      -->
+    </ul>
+  </div>
+</nav>

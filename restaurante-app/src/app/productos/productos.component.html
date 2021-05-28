@@ -1,0 +1,46 @@
+<div class="card border-danger mt-3" style="background: #eeebdd;">
+  <div class="card-body">
+    <h5 class="card-title text-danger">Listado de productos</h5>
+<div class="my-2 text-left">
+      <button class="btn btn-rounded bg-danger bg-gradient text-light" type="button" [routerLink] = "['/productos/formProductos']">Nuevo producto</button>
+</div>
+<div *ngIf="productos?.length==0" class="alert alert-danger">
+  No hay registros en la base de datos
+</div>
+    <table class="table table-bordered table-striped" *ngIf="productos?.length > 0">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Tipo</th>
+          <th>Precio</th>
+          <th>Stock</th>
+          <th>Alcohol</th>
+          <th>Editar</th>
+          <th>Eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let producto of productos">
+          <td>{{producto.nombre}}</td>
+          <td>{{producto.tipo}}</td>
+          <td>{{producto.precio}}</td>
+          <td>{{producto.stock}}</td>
+          <td [ngClass]="producto.alcohol?'bi bi-exclamation-circle-fill':'bi bi-shield-fill-plus'"></td>
+          <td>
+            <button type="button" name="editar" class="btn btn-outline-dark btn-sm">
+              <i class="bi bi-pencil-fill"></i>
+              Editar
+            </button>
+          </td>
+          <td>
+            <button type="button" name="eliminar" (click)="eliminar(producto)" class="btn btn-danger btn-sm">
+              <i class="bi bi-trash-fill"></i>
+              Eliminar
+            </button>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

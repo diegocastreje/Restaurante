@@ -1,0 +1,19 @@
+.content {
+  height: 100%;
+}
+
+.contenedorPrincipal {
+  position: relative;
+  min-height: 100vh;
+  background: #eeebdd
+}
+
+.contenedorPrincipal > div {
+    padding-bottom: 7rem;
+}
+
+app-footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
