@@ -15,7 +15,7 @@
         <div class="col">
           <div class="form-group">
             <label class="fw-bold">Nombre</label>
-            <input type="text" class="form-control" placeholder="Nombre de producto" [(ngModel)]="producto.nombre" name="nombre" #nombre=ngModel required>
+            <input type="text" class="form-control border border-dark" placeholder="Nombre de producto" [(ngModel)]="producto.nombre" name="nombre" #nombre=ngModel required>
             <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
               <div class="" *ngIf="!nombre.valid ">
                 Nombre requerido
@@ -26,7 +26,7 @@
         <div class="col">
           <div class="form-group">
             <label class="fw-bold">Precio</label>
-            <input type="number" class="form-control" placeholder="Precio de producto" [(ngModel)]="producto.precio" name="precio" #precio=ngModel required>
+            <input type="number" class="form-control border border-dark" placeholder="Precio de producto" [(ngModel)]="producto.precio" name="precio" #precio=ngModel required>
             <div class="alert alert-danger" *ngIf="precio.invalid && (precio.dirty || precio.touched)">
               <div class="" *ngIf="!precio.valid ">
                 Precio requerido
@@ -40,7 +40,7 @@
         <div class="col">
           <div class="form-group">
             <label class="fw-bold">Stock</label>
-            <input type="number" class="form-control" placeholder="Cantidad del producto" [(ngModel)]="producto.stock" name="stock" #stock=ngModel required>
+            <input type="number" class="form-control border border-dark" placeholder="Cantidad del producto" [(ngModel)]="producto.stock" name="stock" #stock=ngModel required>
             <div class="alert alert-danger" *ngIf="stock.invalid && (stock.dirty || stock.touched)">
               <div class="" *ngIf="!stock.valid ">
                 Stock requerido
@@ -50,13 +50,13 @@
         </div>
         <div class="col ms-1">
           <label class="fw-bold">Tipo de Producto</label><br>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input bg-danger border-dark" type="radio" name="inlineRadioOptions" id="comida" value="comida">
-            <label class="form-check-label" for="inlineRadio1">Comida</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input bg-danger border-dark" type="radio" name="inlineRadioOptions" id="bebida" value="bebida">
-            <label class="form-check-label" for="inlineRadio2">Bebida</label>
+          <div class="form-control bg-transparent" style="border:1px solid transparent ">
+            <label class="radio-inline">
+              <input class="form-check-input bg-danger border-dark" type="radio" value="comida" name="tipo" [(ngModel)]="producto.tipo">Comida
+            </label>
+            <label class="radio-inline">
+              <input class="form-check-input bg-danger border-dark" type="radio" value="bebida" name="tipo" [(ngModel)]="producto.tipo">Bebida
+            </label>
           </div>
         </div>
       </div><br>

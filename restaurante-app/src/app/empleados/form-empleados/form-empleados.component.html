@@ -15,7 +15,7 @@
         <div class="col">
           <div class="form-group">
             <label class="fw-bold">Usuario</label>
-            <input type="text" class="form-control" placeholder="Nombre de usuario" [(ngModel)]="empleado.usuario" name="usuario" #usuario=ngModel required minlength="4">
+            <input type="text" class="form-control border border-dark" placeholder="Nombre de usuario" [(ngModel)]="empleado.usuario" name="usuario" #usuario=ngModel required minlength="4">
             <div class="alert alert-danger" *ngIf="usuario.invalid && (usuario.dirty || usuario.touched)">
               <div *ngIf="!usuario.valid ">
                 Usuario requerido y debe tener más de 4 letras
@@ -26,7 +26,7 @@
         <div class="col">
           <div class="form-group">
             <label class="fw-bold">Contraseña</label>
-            <input type="password" class="form-control" placeholder="Contraseña" [(ngModel)]="empleado.password" name="password" #password=ngModel required>
+            <input type="password" class="form-control border border-dark" placeholder="Contraseña" [(ngModel)]="empleado.password" name="password" #password=ngModel required>
             <div class="alert alert-danger" *ngIf="password.invalid && (password.dirty || password.touched)">
               <div *ngIf="!password.valid ">
                 Contraseña requerida
@@ -40,7 +40,7 @@
         <div class="col">
           <div class="form-group">
             <label class="fw-bold">Nombre</label>
-            <input type="text" class="form-control" placeholder="Nombre de empleado" [(ngModel)]="empleado.nombre" name="nombre" #nombre=ngModel required>
+            <input type="text" class="form-control border border-dark" placeholder="Nombre de empleado" [(ngModel)]="empleado.nombre" name="nombre" #nombre=ngModel required>
             <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
               <div *ngIf="!nombre.valid ">
                 Nombre requerido
@@ -51,7 +51,7 @@
         <div class="col">
           <div class="form-group">
             <label class="fw-bold">Apellido</label>
-            <input type="text" class="form-control" placeholder="Apellido de empleado" [(ngModel)]="empleado.apellido" name="apellido" #apellido=ngModel>
+            <input type="text" class="form-control border border-dark" placeholder="Apellido de empleado" [(ngModel)]="empleado.apellido" name="apellido" #apellido=ngModel>
           </div>
         </div>
       </div><br>
@@ -60,7 +60,7 @@
         <div class="col">
           <div class="form-group">
             <label class="fw-bold">Email</label>
-            <input type="email" class="form-control" placeholder="Email de contacto" [(ngModel)]="empleado.email" name="email" #email=ngModel required email>
+            <input type="email" class="form-control border border-dark" placeholder="Email de contacto" [(ngModel)]="empleado.email" name="email" #email=ngModel required email>
             <div class="alert alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
               <div *ngIf="email.errors && email.errors.required">
                 Email requerido
@@ -74,7 +74,7 @@
         <div class="col">
           <div class="form-group">
             <label class="fw-bold">Salario</label>
-            <input type="number" class="form-control" placeholder="Salario mensual" [(ngModel)]="empleado.salario" name="salario" #salario=ngModel required>
+            <input type="number" class="form-control border border-dark" placeholder="Salario mensual" [(ngModel)]="empleado.salario" name="salario" #salario=ngModel required>
             <div class="alert alert-danger" *ngIf="salario.invalid && (salario.dirty || salario.touched)">
               <div *ngIf="!salario.valid ">
                 Salario requerido
