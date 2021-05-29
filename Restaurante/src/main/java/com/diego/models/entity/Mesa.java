@@ -26,7 +26,7 @@ public class Mesa implements Serializable{
 	
 	@JsonIgnoreProperties(value = {"mesas","hibernateLazyInitializer","handler"}, allowSetters = true)
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name="empleado")
+	@JoinColumn(name="empleado_id")
 	private Empleado empleado;
 	 
 	@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})

@@ -1,15 +1,14 @@
-<div class="card bg-light">
-  <div class="card-header">Mesa</div>
+<div class="card border-danger mt-3" style="background: #eeebdd;">
+  <div class="card-header fw-bold">Mesa</div>
   <div class="card-body">
-    <h4 class="card-title">
-      <a [routerLink]="['/vista']" clas="btn btn-light btn-xs">&laquo; volver</a>
-    </h4>
-    <br>
-
+    <button routerLink='/vista' type="button" name="volver" class="btn btn-danger btn-sm mb-3">
+      <i class="bi bi-caret-left-fill"></i>
+      Volver
+    </button>
     <form>
 
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Empleado</label>
+        <label class="col-sm-2 col-form-label fw-bold">Empleado</label>
         <div class="col-sm-6">
           <input type="text" name="empleado" value=""
           class="form-control" disabled>
@@ -18,49 +17,14 @@
       <br>
 
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Descripción</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" required>
-          <div class="aler alert-danger">
-            La descripción es requerida
-          </div>
-        </div>
-      </div>
-      <br>
-
-      <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Observaciones</label>
-        <div class="col-sm-6">
-          <textarea name="observacion" class="form-control"></textarea>
-        </div>
-      </div>
-      <br>
-
-      <div class="form-group row">
-        <div class="col-sm-6">
-          <!--
-          <mat-form-field>
-            <mat-label>Añadir Producto</mat-label>
-            <input type="text"
-               placeholder="Añadir producto"
-               aria-label="Productos"
-               matInput
-               [formControl]="autocompleteControl"
-               [matAutocomplete]="auto">
-            <mat-autocomplete #auto="matAutocomplete">
-              <mat-option>
-                Producto
-              </mat-option>
-            </mat-autocomplete>
-          </mat-form-field>
-          -->
           <div class="aler alert-danger">
             La factura debe tener productos agregados
           </div>
         </div>
       </div>
 
-      <div class="alert alert-info my-4">
+      <div class="alert alert-danger my-4">
         No hay facturas asignadas para la factura
       </div>
 

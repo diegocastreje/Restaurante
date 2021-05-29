@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Empleado } from '../empleado';
+import { EmpleadoService } from '../empleado.service';
+import { Router,ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-form-empleados',
@@ -8,10 +13,37 @@ import { Component, OnInit } from '@angular/core';
 export class FormEmpleadosComponent implements OnInit {
 
   public titulo: string = "Añadir Empleado";
+  public empleado:Empleado =new Empleado();
 
-  constructor() { }
+  constructor(public empleadoService : EmpleadoService,
+  public router:Router,
+  public activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.cargarEmpleado();
+  }
+
+  cargarEmpleado():void{
+    this.activatedRoute.params.subscribe(params =>{
+      let empleado_id = params['id']
+      if(empleado_id){
+        this.empleadoService.getEmpleado(empleado_id).subscribe((empleado) => this.empleado = empleado)
+      }
+    })
+  }
+
+  public create():void{
+    this.empleadoService.create(this.empleado).subscribe(
+      reponse => this.router.navigate(['/empleados'])
+
+    )
+  }
+
+  update():void{
+    this.empleadoService.update(this.empleado).subscribe(user => {
+      this.router.navigate(['/empleados'])
+        Swal.fire('Empleado actualizado',`Empleado ${this.empleado.usuario} actualizado con exito`, 'success')
+    });
   }
 
 }

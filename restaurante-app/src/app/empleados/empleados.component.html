@@ -31,7 +31,7 @@
           <td>{{empleado.salario}}</td>
 
           <td>
-            <button type="button" name="editar" class="btn btn-outline-dark btn-sm">
+            <button type="button" name="editar" class="btn btn-outline-dark btn-sm" [routerLink]="['/empleados/formEmpleados', empleado.id]">
               <i class="bi bi-pencil-fill"></i>
               Editar
             </button>

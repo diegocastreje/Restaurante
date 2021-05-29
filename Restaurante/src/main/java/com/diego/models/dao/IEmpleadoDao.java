@@ -1,9 +1,9 @@
 package com.diego.models.dao;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
 import com.diego.models.entity.Empleado;
 
-public interface IEmpleadoDao extends JpaRepository<Empleado, Long>{
-
+public interface IEmpleadoDao extends CrudRepository<Empleado, Long>{
+	
 }

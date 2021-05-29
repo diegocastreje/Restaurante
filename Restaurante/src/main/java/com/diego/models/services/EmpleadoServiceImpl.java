@@ -28,7 +28,6 @@ public class EmpleadoServiceImpl implements IEmpleadoService{
 	}
 
 	@Override
-	@Transactional()
 	public void delete(Long id) {
 		empleadoDao.deleteById(id);
 	}
