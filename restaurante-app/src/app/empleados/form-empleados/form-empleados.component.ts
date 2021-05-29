@@ -3,7 +3,6 @@ import { Empleado } from '../empleado';
 import { EmpleadoService } from '../empleado.service';
 import { Router,ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
-import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-form-empleados',

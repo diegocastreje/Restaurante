@@ -17,6 +17,41 @@ export class ProductoService {
     return this.http.get<Producto[]>(this.urlEndPoint);
   }
 
+  getProducto(id:number): Observable<Producto> {
+    return this.http.get<Producto>(`${this.urlEndPoint}/${id}`);
+  }
+
+  create(producto: Producto): Observable<any> {
+    return this.http.post<any>(this.urlEndPoint, producto).pipe(
+      catchError(e => {
+
+        if (e.status == 400) {
+          return throwError(e);
+        }
+        if ( e.error.mensaje) {
+          console.error(e.error.mensaje);
+        }
+
+        return throwError(e);
+      })
+    );
+  }
+
+  update(producto:Producto):Observable<Producto>{
+    return this.http.put<any>(`${this.urlEndPoint}/${producto.id}`,producto).pipe(
+      catchError(e => {
+
+        if (e.status == 400) {
+          return throwError(e);
+        }
+        if ( e.error.mensaje) {
+          console.error(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
+
   delete(id: number): Observable<Producto>{
     return this.http.delete<Producto>(`${this.urlEndPoint}/${id}`).pipe(
       catchError(e =>{
