@@ -36,12 +36,13 @@ export class FormEmpleadosComponent implements OnInit {
       reponse => this.router.navigate(['/empleados'])
 
     )
+    Swal.fire('Empleado creado',`Empleado ${this.empleado.usuario} creado con éxito`, 'success')
   }
 
   update():void{
     this.empleadoService.update(this.empleado).subscribe(user => {
       this.router.navigate(['/empleados'])
-        Swal.fire('Empleado actualizado',`Empleado ${this.empleado.usuario} actualizado con exito`, 'success')
+        Swal.fire('Empleado actualizado',`Empleado ${this.empleado.usuario} actualizado con éxito`, 'success')
     });
   }
 

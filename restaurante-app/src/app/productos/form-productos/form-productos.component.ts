@@ -34,14 +34,14 @@ export class FormProductosComponent implements OnInit {
   public create():void{
     this.productoService.create(this.producto).subscribe(
       reponse => this.router.navigate(['/productos'])
-
-    )
+    );
+    Swal.fire('Producto creado',`Producto ${this.producto.nombre} creado con éxito`, 'success')
   }
 
   update():void{
     this.productoService.update(this.producto).subscribe(user => {
       this.router.navigate(['/productos'])
-        Swal.fire('Producto actualizado',`Producto ${this.producto.nombre} actualizado con exito`, 'success')
+        Swal.fire('Producto actualizado',`Producto ${this.producto.nombre} actualizado con éxito`, 'success')
     });
   }
 
