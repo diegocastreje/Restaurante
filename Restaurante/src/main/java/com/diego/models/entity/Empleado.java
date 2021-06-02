@@ -1,25 +1,22 @@
 package com.diego.models.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -53,14 +50,24 @@ public class Empleado implements Serializable{
 	@NotNull
 	private int salario;
 	
-	@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
-	@ManyToMany(fetch = FetchType.LAZY)
+	@NotNull
+	@ManyToMany()
 	@JoinTable(name="empleados_roles", joinColumns = @JoinColumn(name="empleado_id"), 
-	inverseJoinColumns = @JoinColumn(name="rol_id"),
-	uniqueConstraints = {@UniqueConstraint(columnNames = {"empleado_id","rol_id"})})
-	private List<Rol> roles;
+	inverseJoinColumns = @JoinColumn(name="rol_id"))
+	private Set<Rol> roles = new HashSet<>();
 	
 	public Empleado() {
+	}
+
+	public Empleado(String usuario, String password, String nombre, String apellido, @Email String email,
+			@NotNull int salario) {
+		super();
+		this.usuario = usuario;
+		this.password = password;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+		this.salario = salario;
 	}
 
 	public Long getId() {
@@ -119,11 +126,11 @@ public class Empleado implements Serializable{
 		this.salario = salario;
 	}
 
-	public List<Rol> getRoles() {
+	public Set<Rol> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(List<Rol> roles) {
+	public void setRoles(Set<Rol> roles) {
 		this.roles = roles;
 	}
 

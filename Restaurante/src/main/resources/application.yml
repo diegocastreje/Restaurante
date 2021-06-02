@@ -23,3 +23,6 @@ logging:
     '[org.hibernate.sql]': debug
 server:
   port: 8081
+jwt:
+  secret: secret
+  expiration: 36000

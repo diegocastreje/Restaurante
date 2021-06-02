@@ -2,12 +2,16 @@ package com.diego.models.entity;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import com.diego.security.enums.RolNombre;
 
 @Entity
 @Table(name="roles")
@@ -17,10 +21,17 @@ public class Rol implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(unique = true,length = 20)
-	private String nombre;
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	private RolNombre nombre;
 
 	public Rol() {}
+
+	public Rol(Long id, @NotNull RolNombre nombre) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+	}
 
 	public Long getId() {
 		return id;
@@ -30,11 +41,11 @@ public class Rol implements Serializable{
 		this.id = id;
 	}
 
-	public String getNombre() {
+	public RolNombre getNombre() {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
+	public void setNombre(RolNombre nombre) {
 		this.nombre = nombre;
 	}
 
