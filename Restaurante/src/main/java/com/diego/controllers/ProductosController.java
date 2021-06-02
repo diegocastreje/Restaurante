@@ -66,7 +66,7 @@ public class ProductosController {
 		return new ResponseEntity<Producto>(producto, HttpStatus.OK);
 	}
 	
-	@PreAuthorize("hasRole('ROL_JEFE')")
+	//@PreAuthorize("hasRole('ROL_JEFE')")
 	@PostMapping("/productos")
 	public ResponseEntity<?> create(@Valid @RequestBody Producto producto, BindingResult result) {
 		
@@ -97,7 +97,7 @@ public class ProductosController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED); 
 	}
 	
-	@PreAuthorize("hasRole('ROL_JEFE')")
+	//@PreAuthorize("hasRole('ROL_JEFE')")
 	@PutMapping("/productos/{id}")
 	public ResponseEntity<?> update(@Valid @RequestBody Producto producto, BindingResult result, @PathVariable Long id) {
 		
@@ -146,7 +146,7 @@ public class ProductosController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED); 
 	}
 	
-	@PreAuthorize("hasRole('ROL_JEFE')")
+	//@PreAuthorize("hasRole('ROL_JEFE')")
 	@DeleteMapping("/productos/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 		
