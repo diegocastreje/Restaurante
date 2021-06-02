@@ -20,4 +20,8 @@ public class RolServiceImpl {
 	public Optional<Rol> getByNombre(RolNombre nombre){
 		return rolDao.findByNombre(nombre);
 	}
+	
+	public void save(Rol rol) {
+		rolDao.save(rol);
+	}
 }

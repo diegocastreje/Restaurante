@@ -2,7 +2,6 @@ package com.diego.models.entity;
 
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -18,32 +17,28 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 @Entity
 @Table(name="empleados")
-public class Empleado implements Serializable{
+public class Empleado{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="empleado_id")
 	private Long id;
 	
-	@NotEmpty(message = "Este campo no puede estar vacío")
+	@NotNull
 	private String usuario;
 
-	@NotEmpty(message = "Este campo no puede estar vacío")
+	@NotNull	
 	private String password;
 	
-	@NotEmpty(message = "Este campo no puede estar vacío")
+	@NotNull
 	private String nombre;
 
 	private String apellido;
 	
 	@Email
-	@NotEmpty(message = "Este campo no puede estar vacío")
+	@NotNull
 	@Column(unique = true)
 	private String email;
 	
@@ -51,7 +46,7 @@ public class Empleado implements Serializable{
 	private int salario;
 	
 	@NotNull
-	@ManyToMany()
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name="empleados_roles", joinColumns = @JoinColumn(name="empleado_id"), 
 	inverseJoinColumns = @JoinColumn(name="rol_id"))
 	private Set<Rol> roles = new HashSet<>();
@@ -133,7 +128,5 @@ public class Empleado implements Serializable{
 	public void setRoles(Set<Rol> roles) {
 		this.roles = roles;
 	}
-
-	private static final long serialVersionUID = 1L;
 
 }

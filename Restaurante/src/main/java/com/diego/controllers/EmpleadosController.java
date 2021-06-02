@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -38,11 +39,13 @@ public class EmpleadosController {
 	
 	private final Logger LOG = LoggerFactory.getLogger(EmpleadosController.class);
 	
+	@PreAuthorize("hasRole('ROL_JEFE')")
 	@GetMapping("/empleados")	
 	public List<Empleado> index(){
 		return empleadoService.findAll();
 	}
 	
+	@PreAuthorize("hasRole('ROL_JEFE')")
 	@GetMapping("/empleados/{id}")
 	public ResponseEntity<?> show(@PathVariable Long id) {
 		
@@ -65,6 +68,7 @@ public class EmpleadosController {
 		return new ResponseEntity<Empleado>(empleado, HttpStatus.OK);
 	}
 	
+	@PreAuthorize("hasRole('ROL_JEFE')")
 	@PostMapping("/empleados")
 	public ResponseEntity<?> create(@Valid @RequestBody Empleado empleado, BindingResult result) {
 		
@@ -95,6 +99,7 @@ public class EmpleadosController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED); 
 	}
 	
+	@PreAuthorize("hasRole('ROL_JEFE')")
 	@PutMapping("/empleados/{id}")
 	public ResponseEntity<?> update(@Valid @RequestBody Empleado empleado, BindingResult result, @PathVariable Long id) {
 		
@@ -143,6 +148,7 @@ public class EmpleadosController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED); 
 	}
 	
+	@PreAuthorize("hasRole('ROL_JEFE')")
 	@DeleteMapping("/empleados/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 		

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -65,6 +66,7 @@ public class ProductosController {
 		return new ResponseEntity<Producto>(producto, HttpStatus.OK);
 	}
 	
+	@PreAuthorize("hasRole('ROL_JEFE')")
 	@PostMapping("/productos")
 	public ResponseEntity<?> create(@Valid @RequestBody Producto producto, BindingResult result) {
 		
@@ -95,6 +97,7 @@ public class ProductosController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED); 
 	}
 	
+	@PreAuthorize("hasRole('ROL_JEFE')")
 	@PutMapping("/productos/{id}")
 	public ResponseEntity<?> update(@Valid @RequestBody Producto producto, BindingResult result, @PathVariable Long id) {
 		
@@ -143,6 +146,7 @@ public class ProductosController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED); 
 	}
 	
+	@PreAuthorize("hasRole('ROL_JEFE')")
 	@DeleteMapping("/productos/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 		
