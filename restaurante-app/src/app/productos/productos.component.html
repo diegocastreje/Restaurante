@@ -1,7 +1,7 @@
 <div class="card border-danger mt-3" style="background: #eeebdd;">
   <div class="card-body">
     <h5 class="card-title text-danger">Listado de productos</h5>
-<div class="my-2 text-left">
+<div class="my-2 text-left" *ngIf="isJefe">
       <button class="btn btn-rounded bg-danger bg-gradient text-light" type="button" [routerLink] = "['/productos/formProductos']">Nuevo producto</button>
 </div>
 <div *ngIf="productos?.length==0" class="alert alert-danger">
@@ -15,8 +15,8 @@
           <th>Precio</th>
           <th>Stock</th>
           <th>Alcohol</th>
-          <th>Editar</th>
-          <th>Eliminar</th>
+          <th *ngIf="isJefe">Editar</th>
+          <th *ngIf="isJefe">Eliminar</th>
         </tr>
       </thead>
       <tbody>
@@ -26,13 +26,13 @@
           <td>{{producto.precio}}</td>
           <td>{{producto.stock}}</td>
           <td [ngClass]="producto.alcohol?'bi bi-exclamation-circle-fill':''"></td>
-          <td>
+          <td *ngIf="isJefe">
             <button type="button" name="editar" class="btn btn-outline-dark btn-sm" [routerLink]="['/productos/formProductos', producto.id]">
               <i class="bi bi-pencil-fill"></i>
               Editar
             </button>
           </td>
-          <td>
+          <td *ngIf="isJefe">
             <button type="button" name="eliminar" (click)="eliminar(producto)" class="btn btn-danger btn-sm">
               <i class="bi bi-trash-fill"></i>
               Eliminar

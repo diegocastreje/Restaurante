@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Empleado } from './empleado';
 import { EmpleadoService } from './empleado.service';
 import swal from 'sweetalert2';
+import { TokenService } from '../security/services/token.service';
 
 @Component({
   selector: 'app-empleados',
@@ -12,11 +13,23 @@ export class EmpleadosComponent implements OnInit {
 
   empleados: Empleado[] = [];
 
-  constructor(private empleadoService: EmpleadoService) { }
+  roles: string[];
+  isJefe = false;
+
+  constructor(
+    private empleadoService: EmpleadoService,
+    private tokenService: TokenService
+  ) { }
 
   ngOnInit(): void {
     this.empleadoService.getItems().subscribe((response) => {
       this.empleados = response;
+    });
+    this.roles = this.tokenService.getAuthorities();
+    this.roles.forEach( rol => {
+      if(rol === 'ROL_JEFE'){
+        this.isJefe = true;
+      }
     });
   }
 

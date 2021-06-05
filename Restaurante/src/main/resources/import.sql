@@ -6,6 +6,13 @@ INSERT INTO empleados(usuario, password, nombre, apellido, email, salario) VALUE
 INSERT INTO empleados(usuario, password, nombre, apellido, email, salario) VALUES ('zapi','1234','Jose', 'Zapata', 'josezapata@gmail.com', 1500);
 INSERT INTO empleados(usuario, password, nombre, apellido, email, salario) VALUES ('niquikiller','1234','Hector', 'Niqui', 'hectorniqui@gmail.com', 1200);
 
+INSERT INTO empleados_roles (empleado_id, rol_id) VALUES (1, 1);
+INSERT INTO empleados_roles (empleado_id, rol_id) VALUES (1, 2);
+INSERT INTO empleados_roles (empleado_id, rol_id) VALUES (2, 1);
+INSERT INTO empleados_roles (empleado_id, rol_id) VALUES (3, 1);
+INSERT INTO empleados_roles (empleado_id, rol_id) VALUES (4, 1);
+INSERT INTO empleados_roles (empleado_id, rol_id) VALUES (4, 2);
+
 INSERT INTO productos(nombre, precio, stock, tipo, alcohol) VALUES ('Nestea 350ml','1.70', 20, 'bebida', false);
 INSERT INTO productos(nombre, precio, stock, tipo, alcohol) VALUES ('Coca cola 350ml','2', 40, 'bebida', false);
 INSERT INTO productos(nombre, precio, stock, tipo, alcohol) VALUES ('Copa Ron Kraken 700ml','6', 15, 'bebida', true);

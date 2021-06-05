@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 const TOKEN_KEY = 'AuthToken';
 const USUARIO_KEY = 'AuthUsuario';
@@ -11,7 +12,7 @@ export class TokenService {
 
   roles: Array<string> = [];
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   public setToken(token: string): void{
     window.sessionStorage.removeItem(TOKEN_KEY);
@@ -39,7 +40,7 @@ export class TokenService {
   public getAuthorities(): string[]{
     this.roles = [];
     if (sessionStorage.getItem(AUTHORITIES_KEY))
-      JSON.parse(sessionStorage.getItem(AUTHORITIES_KEY)).foreach(authority => {
+      JSON.parse(sessionStorage.getItem(AUTHORITIES_KEY)).forEach(authority => {
         this.roles.push(authority.authority);
       });
     return this.roles;

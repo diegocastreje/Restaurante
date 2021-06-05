@@ -1,32 +1,27 @@
-<div class="container-fluid ms-5">
-  <!--
-      <ul class="nav nav-pills nav-fill">
-        <li (click)="activeComida()" class="nav-item btn">
-          <a [ngClass]="comida?'bg-danger bg-gradient nav-link text-dark':'nav-link text-dark'">Comida</a>
-        </li>
-        <li (click)="activeBebida()" class="nav-item btn">
-           <a [ngClass]="bebida?'bg-danger bg-gradient nav-link text-dark':'nav-link text-dark'">Bebida</a>
-        </li>
-      </ul>
-      -->
-      <table style="width: 100%;">
-        <tr>
-          <td><button routerLink="/vista/mesa" class="border border-dark btn btn-light" style="width:100px; height:100px; margin-left: 50px; margin-top: 20px; margin-bottom: 30px;" type="button">1</button></td>
-          <td><button routerLink="/vista/mesa" class="border border-dark btn btn-light" style="width:100px; height:100px; margin-left: 50px; margin-top: 20px; margin-bottom: 30px;" type="button">2</button></td>
-          <td><button routerLink="/vista/mesa" class="border border-dark btn btn-light" style="width:100px; height:100px; margin-left: 50px; margin-top: 20px; margin-bottom: 30px;" type="button">3</button></td>
-          <td><button routerLink="/vista/mesa" class="border border-dark btn btn-light" style="width:100px; height:100px; margin-left: 50px; margin-top: 20px; margin-bottom: 30px;" type="button">4</button></td>
-        </tr>
-        <tr>
-          <td><button routerLink="/vista/mesa" class="border border-dark btn btn-light" style="width:100px; height:100px; margin-left: 50px; margin-top: 20px; margin-bottom: 30px;" type="button">5</button></td>
-          <td><button routerLink="/vista/mesa" class="border border-dark btn btn-danger bg-gradient" style="width:100px; height:100px; margin-left: 50px; margin-top: 20px; margin-bottom: 30px;" type="button">6</button></td>
-          <td><button routerLink="/vista/mesa" class="border border-dark btn btn-light" style="width:100px; height:100px; margin-left: 50px; margin-top: 20px; margin-bottom: 30px;" type="button">7</button></td>
-          <td><button routerLink="/vista/mesa" class="border border-dark btn btn-light" style="width:100px; height:100px; margin-left: 50px; margin-top: 20px; margin-bottom: 30px;" type="button">8</button></td>
-        </tr>
-        <tr>
-          <td><button routerLink="/vista/mesa" class="border border-dark btn btn-light" style="width:100px; height:100px; margin-left: 50px; margin-top: 20px; margin-bottom: 30px;" type="button">9</button></td>
-          <td><button routerLink="/vista/mesa" class="border border-dark btn btn-light" style="width:100px; height:100px; margin-left: 50px; margin-top: 20px; margin-bottom: 30px;" type="button">10</button></td>
-          <td><button routerLink="/vista/mesa" class="border border-dark btn btn-light" style="width:100px; height:100px; margin-left: 50px; margin-top: 20px; margin-bottom: 30px;" type="button">11</button></td>
-          <td><button routerLink="/vista/mesa" class="border border-dark btn btn-light" style="width:100px; height:100px; margin-left: 50px; margin-top: 20px; margin-bottom: 30px;" type="button">12</button></td>
-        </tr>
-      </table>
+<div class="container-fluid ms-5" *ngIf="isLogged; else loggedOut">
+  <table style="width: 100%;">
+    <tr>
+      <td><button routerLink="/vista/mesa" class="border border-dark btn btn-light" style="width:100px; height:100px; margin-left: 50px; margin-top: 20px; margin-bottom: 30px;" type="button">1</button></td>
+      <td><button routerLink="/vista/mesa" class="border border-dark btn btn-light" style="width:100px; height:100px; margin-left: 50px; margin-top: 20px; margin-bottom: 30px;" type="button">2</button></td>
+      <td><button routerLink="/vista/mesa" class="border border-dark btn btn-light" style="width:100px; height:100px; margin-left: 50px; margin-top: 20px; margin-bottom: 30px;" type="button">3</button></td>
+      <td><button routerLink="/vista/mesa" class="border border-dark btn btn-light" style="width:100px; height:100px; margin-left: 50px; margin-top: 20px; margin-bottom: 30px;" type="button">4</button></td>
+    </tr>
+    <tr>
+      <td><button routerLink="/vista/mesa" class="border border-dark btn btn-light" style="width:100px; height:100px; margin-left: 50px; margin-top: 20px; margin-bottom: 30px;" type="button">5</button></td>
+      <td><button routerLink="/vista/mesa" class="border border-dark btn btn-danger bg-gradient" style="width:100px; height:100px; margin-left: 50px; margin-top: 20px; margin-bottom: 30px;" type="button">6</button></td>
+      <td><button routerLink="/vista/mesa" class="border border-dark btn btn-light" style="width:100px; height:100px; margin-left: 50px; margin-top: 20px; margin-bottom: 30px;" type="button">7</button></td>
+      <td><button routerLink="/vista/mesa" class="border border-dark btn btn-light" style="width:100px; height:100px; margin-left: 50px; margin-top: 20px; margin-bottom: 30px;" type="button">8</button></td>
+    </tr>
+    <tr>
+      <td><button routerLink="/vista/mesa" class="border border-dark btn btn-light" style="width:100px; height:100px; margin-left: 50px; margin-top: 20px; margin-bottom: 30px;" type="button">9</button></td>
+      <td><button routerLink="/vista/mesa" class="border border-dark btn btn-light" style="width:100px; height:100px; margin-left: 50px; margin-top: 20px; margin-bottom: 30px;" type="button">10</button></td>
+      <td><button routerLink="/vista/mesa" class="border border-dark btn btn-light" style="width:100px; height:100px; margin-left: 50px; margin-top: 20px; margin-bottom: 30px;" type="button">11</button></td>
+      <td><button routerLink="/vista/mesa" class="border border-dark btn btn-light" style="width:100px; height:100px; margin-left: 50px; margin-top: 20px; margin-bottom: 30px;" type="button">12</button></td>
+    </tr>
+  </table>
 </div>
+<ng-template #loggedOut>
+  <div class="text-center mt-5">
+    <h1><span class="text-danger fw-bold">No has iniciado sesión</span></h1>
+  </div>
+</ng-template>

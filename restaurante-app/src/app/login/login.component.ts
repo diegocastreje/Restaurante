@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Empleado } from '../empleados/empleado';
-import swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import swal from 'sweetalert2';
+import { TokenService } from '../security/services/token.service';
+import { AuthService } from '../security/services/auth.service';
+import { LoginEmpleado } from '../security/models/login-empleado';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -9,44 +12,62 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  empleado: Empleado;
+  isLogged = false;
+  isLoginFail = false;
+  loginEmpleado: LoginEmpleado;
 
-  constructor(private router: Router) {
-  this.empleado = new Empleado() }
+  usuario: string;
+  password: string;
+  roles: string[];
+
+  constructor(private tokenService: TokenService,
+  private authService: AuthService,
+  private router: Router
+) {}
 
   ngOnInit(): void {
-    /* Cuando se implemente seguridad en front
-    if(this.authService.isAuthenticated()){
-      swal.fire('Login', `Hola ${this.authService.empleado.username} ya hay una sesión iniciada`, 'info')
-      this.router.navigate(['/empleados']);
+    if(this.tokenService.getToken()){
+      this.isLogged = true;
+      this.isLoginFail = false;
+      this.roles = this.tokenService.getAuthorities();
     }
-    */
   }
 
-  login(): void{
-    console.log(this.empleado);
-    if(this.empleado.usuario == null || this.empleado.password == null){
-      swal.fire('Error login', 'Usuario o contraseña vacías!', 'error');
-      return;
-    }
-    /* Cuando se implemente seguridad en front
-    this.authService.login(this.empleado).subscribe(response => {
-      console.log(response);
+  onLogin(): void{
+    this.loginEmpleado = new LoginEmpleado(this.usuario, this.password);
+    this.authService.login(this.loginEmpleado).subscribe(
+      data => {
+        this.isLogged = true;
+        this.isLoginFail = false;
 
-      this.authService.guardarEmpleado(response.access_token);
-      this.authService.guardarToken(response.access_token);
+        this.tokenService.setToken(data.token);
+        this.tokenService.setUsuario(data.usuario);
+        this.tokenService.setAuthorities(data.authorities);
+        this.roles = data.authorities;
 
-      let usuario = this.authService.usuario;
+        swal
+          .fire({
+            title: 'Inicio de sesión',
+            text: `Ha iniciado sesión con éxito`,
+            icon: 'success',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK!',
+          })
+          .then((result) => {
+            if (result.isConfirmed) {
+              this.router.navigate(['/vista'])
+              .then(() => {
+                window.location.reload();
+              });
+            }
+          });
 
-      this.router.navigate(['/clientes']);
-      swal.fire('Login', `Hola ${usuario.username}, has iniciado sesión con éxito`, 'success')
-    }, err => {
-      if(err.status == 400){
-        swal.fire('Error login', 'Usuario o clave incorrectas!', 'error');
+      },
+      err => {
+        this.isLogged = false;
+        this.isLoginFail = true;
       }
-    }
-  );
-  */
+    );
   }
 
 }

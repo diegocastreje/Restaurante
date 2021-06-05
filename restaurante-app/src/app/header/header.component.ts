@@ -1,20 +1,25 @@
-import{Component} from '@angular/core';
-import { Router } from '@angular/router';
+import{Component, OnInit} from '@angular/core';
+import { TokenService } from '../security/services/token.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: '/header.component.html'
 })
-export class HeaderComponent{
+export class HeaderComponent implements OnInit{
+
   title: string = 'Mi Restaurante';
+  isLogged = false;
+  usuario = '';
 
-  constructor(private router: Router){}
+  constructor(private tokenService: TokenService){}
 
-/* Cuando se implemente la seguridad
-  logout(): void{
-    swal.fire('Logout', `Hola ${this.authService.usuario.username}, has cerrado sesión con éxito`, 'success');
-    this.router.navigate(['/login']);
-    this.authService.logout();
+  ngOnInit(): void{
+    if(this.tokenService.getToken()){
+      this.isLogged = true;
+      this.usuario = this.tokenService.getUsuario();
+    }else{
+      this.isLogged = false;
+      this.usuario = '';
+    }
   }
-  */
 }

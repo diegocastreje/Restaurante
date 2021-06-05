@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import swal from 'sweetalert2';
+import { TokenService } from '../../security/services/token.service';
 
 @Component({
   selector: 'app-configuracion',
@@ -9,21 +10,39 @@ import swal from 'sweetalert2';
 })
 export class ConfiguracionComponent implements OnInit {
 
-  constructor(private router: Router) { }
+    isLogged = false;
+
+  constructor(private router: Router,
+  private tokenService: TokenService) { }
 
   ngOnInit(): void {
+    if(this.tokenService.getToken()){
+      this.isLogged = true;
+    }else{
+      this.isLogged = false;
+    }
   }
 
-  logout(): void{
-    swal.fire('Cierre de sesión', `Has cerrado sesión con éxito`, 'success');
-    this.router.navigate(['/login']);
+  onLogOut(): void{
+    this.tokenService.logOut();
+
+    swal
+      .fire({
+        title: 'Inicio de sesión',
+        text: `Ha iniciado sesión con éxito`,
+        icon: 'success',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK!',
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigate(['/login'])
+          .then(() => {
+            window.location.reload();
+          });
+        }
+      });
+
   }
-  
-  /* Cuando se implemente la seguridad
-    logout(): void{
-      swal.fire('Logout', `Hola ${this.authService.usuario.username}, has cerrado sesión con éxito`, 'success');
-      this.router.navigate(['/login']);
-      this.authService.logout();
-    }
-    */
+
 }

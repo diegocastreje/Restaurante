@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TokenService } from '../security/services/token.service';
 
 @Component({
   selector: 'app-footer',
@@ -7,12 +8,19 @@ import { Component } from '@angular/core';
 })
 export class FooterComponent{
 
+  isLogged = false;
   fecha: string;
   date: Date = new Date();
 
-constructor(){}
+constructor(private tokenService: TokenService){}
 
 ngOnInit(): void {
+
+  if(this.tokenService.getToken()){
+    this.isLogged = true;
+  }else{
+    this.isLogged = false;
+  }
 
   let nombreDia = this.date.getDay();
   let dia = this.date.getDate();

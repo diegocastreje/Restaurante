@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TokenService } from '../security/services/token.service';
 
 @Component({
   selector: 'app-vista',
@@ -7,21 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VistaComponent implements OnInit {
 
-  public comida:boolean = true;
-  public bebida:boolean;
+  isLogged = false;
 
-  constructor() { }
+  constructor(private tokenService: TokenService) { }
 
   ngOnInit(): void {
+    if(this.tokenService.getToken()){
+      this.isLogged = true;
+    }else{
+      this.isLogged = false;
+    }
   }
 
-  public activeComida(){
-    this.comida = true;
-    this.bebida = false;
-  }
-
-  public activeBebida(){
-    this.bebida = true;
-    this.comida = false;
-  }
 }

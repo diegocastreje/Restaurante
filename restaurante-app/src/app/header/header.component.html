@@ -4,18 +4,11 @@
       {{ title }}
     </p>
     <ul class="navbar-nav navbar-right">
-      <!-- Cuando se implemente la seguridad
-      <li *ngIf="!authService.isAuthenticated()">
-      -->
-      <li>
-        <a routerLink="/login" class="btn btn-outline-danger" href="#">Inicia sesión</a>
+
+      <li *ngIf="isLogged">
+        <a class="btn btn-outline-danger disabled"><i class="bi bi-person text-danger"></i> {{ usuario }}</a>
       </li>
-      <!-- Cuando se implemente la seguridad
-      <li *ngIf="authService.isAuthenticated()" class="text-white">
-        {{ authService.usuario.username }}
-        <a (click)="logout()" class="btn btn-danger" type="submit">Sign Out</a>
-      </li>
-      -->
+
     </ul>
   </div>
 </nav>

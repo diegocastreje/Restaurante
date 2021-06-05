@@ -1,4 +1,4 @@
-<div class="container" style="background: #eeebdd;">
+<div class="container" style="background: #eeebdd;" *ngIf="isLogged; else loggedOut">
   <div class="row">
     <div class="col">
       <div class="card mb-5 mt-5">
@@ -19,10 +19,15 @@
     <div class="col">
       <div class="card mb-5 mt-5">
         <div class="card-body bg-danger bg-gradient">
-          <a class="rounded" routerLink="" (click)="logout()"><img class="w-75 h-75" src="..\..\assets\img\box-arrow-right.svg" alt=""></a>
+          <a class="rounded" routerLink="" (click)="onLogOut()"><img class="w-75 h-75" src="..\..\assets\img\box-arrow-right.svg" alt=""></a>
         </div>
         <div class="card-header text-white text-center" style="background: #1b1717;">Cerrar sesión</div>
       </div>
     </div>
   </div>
 </div>
+<ng-template #loggedOut>
+  <div class="text-center mt-5">
+    <h1><span class="text-danger fw-bold">No has iniciado sesión</span></h1>
+  </div>
+</ng-template>

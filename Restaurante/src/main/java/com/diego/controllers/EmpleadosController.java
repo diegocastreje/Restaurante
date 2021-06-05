@@ -2,8 +2,10 @@ package com.diego.controllers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -13,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,7 +29,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.diego.models.entity.Empleado;
+import com.diego.models.entity.Rol;
+import com.diego.models.services.EmpleadoServiceImpl;
 import com.diego.models.services.IEmpleadoService;
+import com.diego.models.services.RolServiceImpl;
+import com.diego.security.dto.NuevoEmpleado;
+import com.diego.security.enums.RolNombre;
 
 @RestController
 @RequestMapping("/restaurante")
@@ -36,6 +43,15 @@ public class EmpleadosController {
 	
 	@Autowired
 	private IEmpleadoService empleadoService;
+	
+	@Autowired
+	private EmpleadoServiceImpl empleadoServiceImpl;
+	
+	@Autowired
+	RolServiceImpl rolService;
+	
+	@Autowired
+	PasswordEncoder passwordEncoder;
 	
 	private final Logger LOG = LoggerFactory.getLogger(EmpleadosController.class);
 	
@@ -70,33 +86,22 @@ public class EmpleadosController {
 	
 	//@PreAuthorize("hasRole('ROL_JEFE')")
 	@PostMapping("/empleados")
-	public ResponseEntity<?> create(@Valid @RequestBody Empleado empleado, BindingResult result) {
+	public ResponseEntity<?> create(@Valid @RequestBody NuevoEmpleado nuevoEmpleado, BindingResult bindingResult) {
 		
-		Empleado empleadoNew = null;
-		Map<String, Object> response = new HashMap<>();
-		
-		if(result.hasErrors()) {
-			
-			List<String> errors = new ArrayList<>();
-			for(FieldError err: result.getFieldErrors()) {
-				errors.add("El campo '" + err.getField() + "' " + err.getDefaultMessage());
-			}
-			
-			response.put("errors", errors);
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
-		}
-		
-		try {
-			empleadoNew = empleadoService.save(empleado);
-		}catch(DataAccessException e){
-			response.put("mensaje", "Error al realizar el insert en la base de datos");
-			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		
-		response.put("mensaje","El empleado ha sido creado con éxito");
-		response.put("empleado", empleadoNew);
-		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED); 
+		if(bindingResult.hasErrors())
+			return new ResponseEntity("Campos incorrectos", HttpStatus.BAD_REQUEST);
+		if(empleadoServiceImpl.existsByUsuario(nuevoEmpleado.getUsuario()))
+			return new ResponseEntity("Ese nombre de usuario ya existe", HttpStatus.BAD_REQUEST);
+		if(empleadoServiceImpl.existsByEmail(nuevoEmpleado.getEmail()))
+			return new ResponseEntity("Ese email ya existe", HttpStatus.BAD_REQUEST);
+		Empleado empleado = new Empleado(nuevoEmpleado.getUsuario(), passwordEncoder.encode(nuevoEmpleado.getPassword()), nuevoEmpleado.getNombre(), nuevoEmpleado.getApellido(), nuevoEmpleado.getEmail(), nuevoEmpleado.getSalario());
+		Set<Rol> roles = new HashSet();
+		roles.add(rolService.getByNombre(RolNombre.ROL_EMPLEADO).get());
+		if(nuevoEmpleado.getRoles().contains("jefe"))
+			roles.add(rolService.getByNombre(RolNombre.ROL_JEFE).get());
+		empleado.setRoles(roles);
+		empleadoService.save(empleado);
+		return new ResponseEntity("Empleado guardado", HttpStatus.CREATED);
 	}
 	
 	//@PreAuthorize("hasRole('ROL_JEFE')")

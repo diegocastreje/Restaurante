@@ -1,23 +1,30 @@
+<div class="text-center mt-5" *ngIf="isLogged; else loggedOut">
+  <h1><span class="text-danger fw-bold">Ya has iniciado sesión</span></h1>
+</div>
+<ng-template #loggedOut>
+
 <div class="container"><br>
   <div class="text-center mb-3">
-    <h1><span class="text-danger" style="font-weight: bold;">Inicio de Sesión</span></h1>
+    <h1><span class="text-danger fw-bold">Inicio de Sesión</span></h1>
   </div>
-  <form>
+  <form #formLogin (ngSubmit)="onLogin()" novalidate>
 
     <div class="row">
       <div class="col mt-5 me-5">
         <div class="form-group">
-          <label style="font-weight: bold;">Usuario</label>
-          <input type="text" class="form-control border border-dark" placeholder="Escriba su nombre de usuario">
+          <label class="fw-bold" for="usuario">Usuario</label>
+          <input type="text" class="form-control border border-dark" name="usuario" id="usuario" placeholder="Escriba su nombre de usuario" [(ngModel)]="usuario" required>
         </div>
         <br>
         <div class="form-group">
-          <label style="font-weight: bold;">Contraseña</label>
-          <input type="password" class="form-control border border-dark" placeholder="Escriba su contraseña">
+          <label class="fw-bold" for="password">Contraseña</label>
+          <input type="password" class="form-control border border-dark" name="password" id="password" placeholder="Escriba su contraseña" [(ngModel)]="password" required>
         </div>
         <br>
-        <button type="submit" class="btn text-white fw-bold" style="background: #1b1717;">Entrar</button>
-        <br><br>
+        <div class="form-group">
+          <button type="submit" class="btn text-white fw-bold" style="background: #1b1717;" [disabled]="!formLogin">Entrar</button>
+        </div><br>
+
         <a>Para acceder al uso de la aplicación usted debe trabajar aquí. Si es así y aún no tiene cuenta comuníqueselo a su jefe.</a>
       </div>
       <div class="col ms-5 mb-5">
@@ -26,4 +33,8 @@
     </div>
 
   </form>
+
+  <div *ngIf="isLoginFail" class="alert alert-danger border border-dark">Fallo en el inicio de sesión: Usuario o Contraseña incorrectos</div>
 </div>
+
+</ng-template>

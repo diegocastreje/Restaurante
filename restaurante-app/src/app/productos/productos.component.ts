@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Producto } from './producto';
 import { ProductoService } from './producto.service';
 import swal from 'sweetalert2';
+import { TokenService } from '../security/services/token.service';
+
 @Component({
   selector: 'app-productos',
   templateUrl: './productos.component.html',
@@ -11,11 +13,23 @@ export class ProductosComponent implements OnInit {
 
   productos: Producto[] = [];
 
-  constructor(private productoService: ProductoService) { }
+  roles: string[];
+  isJefe = false;
+
+  constructor(
+    private productoService: ProductoService,
+    private tokenService: TokenService
+  ) { }
 
   ngOnInit(): void {
     this.productoService.getProductos().subscribe((response) => {
       this.productos = response;
+    });
+    this.roles = this.tokenService.getAuthorities();
+    this.roles.forEach( rol => {
+      if(rol === 'ROL_JEFE'){
+        this.isJefe = true;
+      }
     });
   }
 

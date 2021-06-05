@@ -3,7 +3,7 @@
     <h3 class="card-title text-danger">Listado de empleados</h3>
   </div>
   <div class="card-body">
-<div class="my-2 text-left">
+<div class="my-2 text-left" *ngIf="isJefe">
       <button class="btn btn-rounded bg-danger bg-gradient text-light fw-bolder" type="button" [routerLink] = "['/empleados/formEmpleados']">Nuevo empleado</button>
 </div>
 <div *ngIf="empleados?.length==0" class="alert alert-danger">
@@ -16,9 +16,9 @@
           <th>Nombre</th>
           <th>Apellido</th>
           <th>Email</th>
-          <th>Salario</th>
-          <th>Editar</th>
-          <th>Eliminar</th>
+          <th *ngIf="isJefe">Salario</th>
+          <th *ngIf="isJefe">Editar</th>
+          <th *ngIf="isJefe">Eliminar</th>
         </tr>
       </thead>
       <tbody>
@@ -28,15 +28,15 @@
           <td>{{empleado.nombre}}</td>
           <td>{{empleado.apellido}}</td>
           <td>{{empleado.email}}</td>
-          <td>{{empleado.salario}}</td>
+          <td *ngIf="isJefe">{{empleado.salario}}</td>
 
-          <td>
+          <td *ngIf="isJefe">
             <button type="button" name="editar" class="btn btn-outline-dark btn-sm" [routerLink]="['/empleados/formEmpleados', empleado.id]">
               <i class="bi bi-pencil-fill"></i>
               Editar
             </button>
           </td>
-          <td>
+          <td *ngIf="isJefe">
             <button type="button" name="eliminar" (click)="eliminar(empleado)" class="btn btn-danger btn-sm">
               <i class="bi bi-trash-fill"></i>
               Eliminar

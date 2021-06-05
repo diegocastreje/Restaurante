@@ -14,19 +14,21 @@ import { ProductosComponent } from './productos/productos.component';
 import { FormEmpleadosComponent } from './empleados/form-empleados/form-empleados.component';
 import { FormProductosComponent } from './productos/form-productos/form-productos.component';
 import { MesaComponent } from './vista/mesa/mesa.component';
+import { interceptorProvider } from './security/interceptors/prod-interceptor.service';
+import { ProdGuardService as guard } from './security/guards/prod-guard.service';
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
-  {path: 'vista', component: VistaComponent},
-  {path: 'vista/mesa', component: MesaComponent},
-  {path: 'vista/configuracion', component: ConfiguracionComponent},
-  {path: 'empleados', component: EmpleadosComponent},
-  {path: 'empleados/formEmpleados', component: FormEmpleadosComponent},
-  {path: 'empleados/formEmpleados/:id', component: FormEmpleadosComponent},
-  {path: 'productos', component: ProductosComponent},
-  {path: 'productos/formProductos', component: FormProductosComponent},
-  {path: 'productos/formProductos/:id', component: FormProductosComponent},
+  {path: 'vista', component: VistaComponent, canActivate: [guard], data: { expectedRol: ['jefe', 'empleado']}},
+  {path: 'vista/mesa', component: MesaComponent, canActivate: [guard], data: { expectedRol: ['jefe', 'empleado']}},
+  {path: 'vista/configuracion', component: ConfiguracionComponent, canActivate: [guard], data: { expectedRol: ['jefe', 'empleado']}},
+  {path: 'empleados', component: EmpleadosComponent, canActivate: [guard], data: { expectedRol: ['jefe', 'empleado']}},
+  {path: 'empleados/formEmpleados', component: FormEmpleadosComponent, canActivate: [guard], data: { expectedRol: ['jefe']}},
+  {path: 'empleados/formEmpleados/:id', component: FormEmpleadosComponent, canActivate: [guard], data: { expectedRol: ['jefe']}},
+  {path: 'productos', component: ProductosComponent, canActivate: [guard], data: { expectedRol: ['jefe', 'empleado']}},
+  {path: 'productos/formProductos', component: FormProductosComponent, canActivate: [guard], data: { expectedRol: ['jefe']}},
+  {path: 'productos/formProductos/:id', component: FormProductosComponent, canActivate: [guard], data: { expectedRol: ['jefe']}}
 ];
 
 @NgModule({
@@ -49,7 +51,7 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [interceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
