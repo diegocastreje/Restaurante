@@ -23,12 +23,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.diego.models.entity.Empleado;
 import com.diego.models.entity.Rol;
+import com.diego.models.enums.RolNombre;
 import com.diego.models.services.EmpleadoServiceImpl;
 import com.diego.models.services.RolServiceImpl;
 import com.diego.security.dto.JwtDto;
 import com.diego.security.dto.LoginEmpleado;
 import com.diego.security.dto.NuevoEmpleado;
-import com.diego.security.enums.RolNombre;
 import com.diego.security.jwt.JwtProvider;
 
 @RestController

@@ -44,7 +44,7 @@ private getDia(dia: number): string{
     nombreDia = "Viernes";
   else if (dia == 6)
     nombreDia = "Sábado";
-  else if (dia == 7)
+  else if (dia == 0)
     nombreDia = "Domingo";
   return nombreDia;
 }

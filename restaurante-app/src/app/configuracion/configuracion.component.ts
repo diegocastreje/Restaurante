@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import swal from 'sweetalert2';
-import { TokenService } from '../../security/services/token.service';
+import { TokenService } from '../security/services/token.service';
 
 @Component({
   selector: 'app-configuracion',

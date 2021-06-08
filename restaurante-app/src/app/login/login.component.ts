@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
           })
           .then((result) => {
             if (result.isConfirmed) {
-              this.router.navigate(['/vista'])
+              this.router.navigate(['/mesas'])
               .then(() => {
                 window.location.reload();
               });

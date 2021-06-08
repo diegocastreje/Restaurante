@@ -9,8 +9,6 @@ import java.util.Set;
 
 import javax.validation.Valid;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
@@ -30,11 +28,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.diego.models.entity.Empleado;
 import com.diego.models.entity.Rol;
+import com.diego.models.enums.RolNombre;
 import com.diego.models.services.EmpleadoServiceImpl;
 import com.diego.models.services.IEmpleadoService;
 import com.diego.models.services.RolServiceImpl;
 import com.diego.security.dto.NuevoEmpleado;
-import com.diego.security.enums.RolNombre;
 
 @RestController
 @RequestMapping("/restaurante")
@@ -48,13 +46,11 @@ public class EmpleadosController {
 	private EmpleadoServiceImpl empleadoServiceImpl;
 	
 	@Autowired
-	RolServiceImpl rolService;
+	private RolServiceImpl rolService;
 	
 	@Autowired
-	PasswordEncoder passwordEncoder;
-	
-	private final Logger LOG = LoggerFactory.getLogger(EmpleadosController.class);
-	
+	private PasswordEncoder passwordEncoder;
+		
 	//@PreAuthorize("hasRole('ROL_JEFE')")
 	@GetMapping("/empleados")	
 	public List<Empleado> index(){

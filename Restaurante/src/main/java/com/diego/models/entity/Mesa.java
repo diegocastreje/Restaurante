@@ -1,18 +1,22 @@
 package com.diego.models.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -24,10 +28,9 @@ public class Mesa implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@JsonIgnoreProperties(value = {"mesas","hibernateLazyInitializer","handler"}, allowSetters = true)
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name="empleado_id")
-	private Empleado empleado;
+	@Column(name="fecha")
+	@Temporal(TemporalType.DATE)
+	private Date fecha;
 	 
 	@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -36,6 +39,11 @@ public class Mesa implements Serializable{
 
 	public Mesa() {
 		super();
+	}
+	
+	@PrePersist
+	public void prePersist() {
+		this.fecha = new Date();
 	}
 
 	public long getId() {
@@ -46,12 +54,12 @@ public class Mesa implements Serializable{
 		this.id = id;
 	}
 
-	public Empleado getEmpleado() {
-		return empleado;
+	public Date getFecha() {
+		return fecha;
 	}
 
-	public void setEmpleado(Empleado empleado) {
-		this.empleado = empleado;
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 
 	public List<ProductoMesa> getProductos() {

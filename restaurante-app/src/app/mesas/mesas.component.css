@@ -1,0 +1,9 @@
+.mesa{
+  background: #990000;
+  width:100px;
+  height:100px;
+  margin-left: 50px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  border: 3px solid black;
+}

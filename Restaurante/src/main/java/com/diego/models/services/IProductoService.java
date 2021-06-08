@@ -13,5 +13,7 @@ public interface IProductoService {
 	public void delete(Long id);
 	
 	public Producto findById(Long id);
+	
+	public List<Producto> findByNombre(String term);
 
 }

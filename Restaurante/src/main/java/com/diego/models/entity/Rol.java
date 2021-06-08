@@ -9,7 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import com.diego.security.enums.RolNombre;
+import com.diego.models.enums.RolNombre;
+
 
 @Entity
 @Table(name="roles")

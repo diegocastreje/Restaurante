@@ -22,7 +22,7 @@ export class EmpleadosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.empleadoService.getItems().subscribe((response) => {
+    this.empleadoService.getEmpleados().subscribe((response) => {
       this.empleados = response;
     });
     this.roles = this.tokenService.getAuthorities();

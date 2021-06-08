@@ -1,11 +1,11 @@
 <div class="text-center mt-5" *ngIf="isLogged; else loggedOut">
-  <h1><span class="text-danger fw-bold">Ya has iniciado sesión</span></h1>
+  <h1><span class="fw-bold" style="color: #990000;">Ya has iniciado sesión</span></h1>
 </div>
 <ng-template #loggedOut>
 
 <div class="container"><br>
   <div class="text-center mb-3">
-    <h1><span class="text-danger fw-bold">Inicio de Sesión</span></h1>
+    <h1><span class="fw-bold" style="color: #990000;">Inicio de Sesión</span></h1>
   </div>
   <form #formLogin (ngSubmit)="onLogin()" novalidate>
 

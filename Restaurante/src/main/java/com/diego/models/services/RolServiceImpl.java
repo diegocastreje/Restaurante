@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.diego.models.dao.IRolDao;
 import com.diego.models.entity.Rol;
-import com.diego.security.enums.RolNombre;
+import com.diego.models.enums.RolNombre;
 
 @Service
 @Transactional

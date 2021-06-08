@@ -13,7 +13,7 @@ import com.diego.models.entity.EmpleadoPrincipal;
 public class UserDetailsServiceImpl implements UserDetailsService{
 
 	@Autowired
-	EmpleadoServiceImpl empleadoService;
+	private EmpleadoServiceImpl empleadoService;
 	
 	@Override
 	public UserDetails loadUserByUsername(String usuario) throws UsernameNotFoundException {

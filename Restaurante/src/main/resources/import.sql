@@ -11,7 +11,6 @@ INSERT INTO empleados_roles (empleado_id, rol_id) VALUES (1, 2);
 INSERT INTO empleados_roles (empleado_id, rol_id) VALUES (2, 1);
 INSERT INTO empleados_roles (empleado_id, rol_id) VALUES (3, 1);
 INSERT INTO empleados_roles (empleado_id, rol_id) VALUES (4, 1);
-INSERT INTO empleados_roles (empleado_id, rol_id) VALUES (4, 2);
 
 INSERT INTO productos(nombre, precio, stock, tipo, alcohol) VALUES ('Nestea 350ml','1.70', 20, 'bebida', false);
 INSERT INTO productos(nombre, precio, stock, tipo, alcohol) VALUES ('Coca cola 350ml','2', 40, 'bebida', false);
@@ -23,11 +22,11 @@ INSERT INTO productos(nombre, precio, stock, tipo, alcohol) VALUES ('Hamburguesa
 INSERT INTO productos(nombre, precio, stock, tipo, alcohol) VALUES ('Tortilla','8', 10, 'comida', false);
 INSERT INTO productos(nombre, precio, stock, tipo, alcohol) VALUES ('Tiramisú','4.50', 15, 'comida', false);
 
-INSERT INTO mesas (empleado_id) VALUES (1);
-INSERT INTO mesas (empleado_id) VALUES (1);
-INSERT INTO mesas (empleado_id) VALUES (3);
-INSERT INTO mesas (empleado_id) VALUES (2);
-INSERT INTO mesas (empleado_id) VALUES (4);
+INSERT INTO mesas (fecha) VALUES (NOW());
+INSERT INTO mesas (fecha) VALUES (NOW());
+INSERT INTO mesas (fecha) VALUES (NOW());
+INSERT INTO mesas (fecha) VALUES (NOW());
+INSERT INTO mesas (fecha) VALUES (NOW());
 
 INSERT INTO productos_mesa (mesa, cantidad, producto) VALUES (2, 2, 1);
 INSERT INTO productos_mesa (mesa, cantidad, producto) VALUES (3, 2, 5);
