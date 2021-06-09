@@ -1,6 +1,6 @@
-<div class="card mt-3" style="border-color: #990000; background: #eeebdd;">
+<div class="card mt-3 contenedor">
   <div class="card-header">
-    <h3 class="card-title" style="color: #990000;">Listado de mesas</h3>
+    <h3 class="card-title letraRoja">Listado de mesas</h3>
   </div>
   <div class="card-body">
 <div *ngIf="mesas?.length==0" class="alert alert-danger">
@@ -24,13 +24,14 @@
           <td>{{mesa.id}}</td>
           <td>{{mesa.total}}€</td>
           <td>
-            <button type="button" name="ver" class="btn btn-sm text-white" style="background: #990000;" [routerLink]="['/mesas', mesa.id]">
+            <button type="button" name="ver" class="btn btn-sm text-white fondoRojo" [routerLink]="['/mesas', mesa.id]">
+              <i class="bi bi-eye-fill"></i>
               Ver
             </button>
           </td>
         </tr>
       </tbody>
-      <button *ngIf="mesas.length < 8" type="button" name="crear" class="btn btn-success btn-sm mt-3" (click)= "create()">
+      <button type="button" name="crear" class="btn btn-dark btn-sm mt-3" (click)= "create()">
         Crear
       </button>
     </table>

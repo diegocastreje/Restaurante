@@ -1,7 +1,7 @@
-<div class="card border-danger mt-3" style="background: #eeebdd;">
-  <div class="card-header fw-bold">Mesa {{mesa.fecha}}</div>
+<div class="card border-danger mt-3 fondo">
+  <div class="card-header fw-bold">{{mesa.fecha}}: Mesa {{mesa.id}}</div>
   <div class="card-body">
-    <button routerLink='/mesas' type="button" name="volver" class="btn btn-sm mb-3 text-white" style="background: #810000;">
+    <button routerLink='/mesas' type="button" name="volver" class="btn btn-sm mb-3 text-white fondoRojo">
       <i class="bi bi-caret-left-fill"></i>
       Volver
     </button>
@@ -45,25 +45,25 @@
         <tbody>
           <tr *ngFor="let producto of mesa.productos">
             <td>{{producto.producto.nombre}}</td>
-            <td>{{producto.producto.precio}} €</td>
+            <td>{{producto.producto.precio}}€</td>
             <td>
               <input type="number" value="{{producto.cantidad}}"
               class="form-control col-sm-4" (change)="actualizarCantidad(producto.producto.id, $event)">
             </td>
-            <td>{{producto.calcularImporte()}} €</td>
+            <td>{{producto.importe}}€</td>
             <td>
-              <button class="btn btn-danger btn-sm" type="button" (click)="eliminarProductoMesa(producto.producto.id)">x</button>
+              <button class="btn btn-danger btn-sm" type="button" (click)="eliminarProductoMesa(producto.producto.id)"><i class="bi bi-trash-fill"></i></button>
             </td>
           </tr>
         </tbody>
       </table>
 
-      <h5 class="float-end" *ngIf="mesa.productos.length > 0">Total: <span class="badge bg-dark">{{ mesa.calcularTotal() }} €</span></h5>
+      <h5 class="float-end" *ngIf="mesa.productos.length > 0">Total: <span class="badge bg-dark">{{ mesa.total }}€</span></h5>
 
       <div class="form-group row">
         <div class="col-sm-6">
-          <input type="submit" (click)="pagarMesa(mesaForm)" value="Pagar" class="btn btn-success text-white fw-bold mt-3">
-          <input type="submit" (click)= "update()" value="Guardar Mesa" class="btn text-white mt-3 ms-3" style="background: #810000;">
+          <input type="submit" (click)="pagarMesa(mesa)" value="Pagar" class="btn btn-success text-white fw-bold mt-3">
+          <input type="submit" (click)= "guardarMesa(mesa)" value="Guardar Mesa" class="btn text-white mt-3 ms-3 fondoRojo">
         </div>
       </div>
 

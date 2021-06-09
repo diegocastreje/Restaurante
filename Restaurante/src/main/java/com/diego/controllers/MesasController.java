@@ -66,6 +66,7 @@ public class MesasController {
 	@DeleteMapping("/mesas/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Long id) {
+		System.out.println("borra: " + id);
 		mesaService.deleteMesaById(id);
 	}
 	

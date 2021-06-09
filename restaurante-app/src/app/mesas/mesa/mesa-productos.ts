@@ -7,6 +7,7 @@ export class MesaProductos {
   importe: number;
 
   public calcularImporte(): number{
-    return this.cantidad*this.producto.precio;
+    this.importe = this.cantidad*this.producto.precio;
+    return this.importe;
   }
 }

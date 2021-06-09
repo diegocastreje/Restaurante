@@ -23,6 +23,8 @@ export class MesaService {
   }
 
   delete(id: number): Observable<void>{
+    console.log("borra")
+    console.log(this.http.delete<void>(`${this.urlEndPoint}/${id}`))
     return this.http.delete<void>(`${this.urlEndPoint}/${id}`);
   }
 

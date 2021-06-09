@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MesaService } from './mesa.service';
 import { Mesa } from './mesa';
 import { MesaProductos } from '../mesa/mesa-productos';
+import { ProductoService } from '../../productos/producto.service';
 import { Producto } from '../../productos/producto';
 import { ActivatedRoute, Router } from '@angular/router';
 import {map, flatMap} from 'rxjs/operators';
@@ -18,6 +19,7 @@ import swal from 'sweetalert2';
 })
 export class MesaComponent implements OnInit {
 
+  productos: Producto[] = [];
   mesa: Mesa = new Mesa();
   usuario: string;
 
@@ -27,14 +29,26 @@ export class MesaComponent implements OnInit {
   constructor(
     private mesaService: MesaService,
     private activatedRoute: ActivatedRoute,
-    private tokenService: TokenService) { }
+    private tokenService: TokenService,
+    private router: Router,
+    private productoService: ProductoService
+  ) { }
 
   ngOnInit(): void {
     this.usuario= this.tokenService.getUsuario();
+    this.productoService.getProductos().subscribe((response) => {
+      this.productos = response;
+    });
     this.activatedRoute.paramMap.subscribe(params =>{
       let id = +params.get('id');
-      this.mesaService.getMesa(id).subscribe(mesa => this.mesa.id = id);
+      if(id){
+        this.mesaService.getMesa(id).subscribe((mesa) => {
+          this.mesa = mesa;
+          this.mesa.calcularTotal = mesa.calcularTotal;
+        });
+      }
     });
+    console.log(this.mesa);
     this.productosFiltrados = this.autocompleteControl.valueChanges
       .pipe(
         map(value => typeof value === 'string'? value: value.nombre),
@@ -54,7 +68,6 @@ export class MesaComponent implements OnInit {
 
   seleccionarProducto(event: MatAutocompleteSelectedEvent): void{
     let producto = event.option.value as Producto;
-    console.log(producto);
 
     if(this.existeProducto(producto.id)){
       this.incrementaCantidad(producto.id);
@@ -64,9 +77,12 @@ export class MesaComponent implements OnInit {
         nuevoProducto.producto = producto;
         console.log(nuevoProducto);
         this.mesa.productos.push(nuevoProducto);
+        --nuevoProducto.producto.stock;
+        this.productoService.update(nuevoProducto.producto);
         console.log(this.mesa);
+      }else{
+        swal.fire('Producto sin stock', 'No queda más stock de este producto', 'warning')
       }
-      swal.fire('Producto sin stock', 'No queda más stock de este producto', 'warning')
     }
 
     this.autocompleteControl.setValue('');
@@ -98,14 +114,14 @@ export class MesaComponent implements OnInit {
         existe = true;
       }
     });
+
     return existe;
   }
 
   existeStock(id: number): boolean{
     let existe = false;
-
-    this.mesa.productos.forEach((item: MesaProductos) => {
-      if( item.producto.stock > 0){
+    this.productos.forEach((producto: Producto) => {
+      if( producto.stock > 0){
         existe = true;
       }
     });
@@ -125,15 +141,31 @@ export class MesaComponent implements OnInit {
     this.mesa.productos = this.mesa.productos.filter((item: MesaProductos) => id !== item.producto.id);
   }
 
-  update():void{
-    this.mesaService.update(this.mesa).subscribe(user => {
-        swal.fire('Mesa guardada',`Mesa ${this.mesa.id} guardada con éxito`, 'success')
-    });
-  }
+  guardarMesa(mesa: Mesa):void{
+    this.mesaService.update(mesa).subscribe(mesa => {
+      swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'Mesa guardada',
+  showConfirmButton: false,
+  timer: 700
+}).then(() => {
+  window.location.reload();
+});
+});
 
-  pagarMesa(mesaForm): void{
-    this.mesaService.delete(this.mesa.id);
-    swal.fire('Mesa Pagada',`Mesa ${this.mesa.id} pagada con éxito!`, 'success');
+}
+
+  pagarMesa(mesa: Mesa): void{
+    this.mesaService.delete(mesa.id).subscribe(
+      response =>{
+        swal.fire(
+          'Mesa pagada!',
+          `Mesa ${mesa.id} pagada con éxito.`,
+          'success'
+    );
+    this.router.navigate(['/mesas']);
+  });
   }
 
 }

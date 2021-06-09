@@ -35,6 +35,7 @@ public class MesaServiceImpl implements IMesaService{
 
 	@Override
 	public void deleteMesaById(Long id) {
+		System.out.println(id);
 		mesaDao.deleteById(id);
 	}
 

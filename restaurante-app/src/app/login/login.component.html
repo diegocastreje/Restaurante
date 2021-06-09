@@ -1,11 +1,11 @@
 <div class="text-center mt-5" *ngIf="isLogged; else loggedOut">
-  <h1><span class="fw-bold" style="color: #990000;">Ya has iniciado sesión</span></h1>
+  <h1><span class="fw-bold letraRoja">Ya has iniciado sesión</span></h1>
 </div>
 <ng-template #loggedOut>
 
 <div class="container"><br>
   <div class="text-center mb-3">
-    <h1><span class="fw-bold" style="color: #990000;">Inicio de Sesión</span></h1>
+    <h1><span class="fw-bold letraRoja">Inicio de Sesión</span></h1>
   </div>
   <form #formLogin (ngSubmit)="onLogin()" novalidate>
 
@@ -22,7 +22,7 @@
         </div>
         <br>
         <div class="form-group">
-          <button type="submit" class="btn text-white fw-bold" style="background: #1b1717;" [disabled]="!formLogin">Entrar</button>
+          <button type="submit" class="btn text-white fw-bold fondoNegro" [disabled]="!formLogin">Entrar</button>
         </div><br>
 
         <a>Para acceder al uso de la aplicación usted debe trabajar aquí. Si es así y aún no tiene cuenta comuníqueselo a su jefe.</a>

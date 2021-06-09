@@ -1,0 +1,16 @@
+.fondoRojo{
+    background: #990000;
+}
+
+.contenedor{
+  background: #eeebdd;
+}
+
+.letraRoja{
+  color: #990000;
+}
+
+.btnSubmit{
+  background: #1b1717;
+  width: 120px;
+}

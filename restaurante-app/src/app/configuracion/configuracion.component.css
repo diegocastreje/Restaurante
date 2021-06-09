@@ -2,3 +2,19 @@ img{
 display:block;
 margin:auto;
 }
+
+.fondoRojo{
+    background: #990000;
+}
+
+.fondoNegro{
+   background: #1b1717;
+}
+
+.contenedor{
+  background: #eeebdd;
+}
+
+.letraRoja{
+  color: #990000;
+}

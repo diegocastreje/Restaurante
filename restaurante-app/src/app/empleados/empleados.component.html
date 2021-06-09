@@ -1,10 +1,10 @@
-<div class="card mt-3" style="border-color: #990000; background: #eeebdd;">
+<div class="card mt-3 contenedor">
   <div class="card-header">
-    <h3 class="card-title" style="color: #990000;">Listado de empleados</h3>
+    <h3 class="card-title letraRoja">Listado de empleados</h3>
   </div>
   <div class="card-body">
 <div class="my-2 text-left" *ngIf="isJefe">
-      <button class="btn btn-rounded text-light fw-bolder" type="button" [routerLink] = "['/empleados/formEmpleados']" style="background: #990000;">Nuevo empleado</button>
+      <button class="btn btn-rounded text-light fw-bolder fondoRojo" type="button" [routerLink] = "['/empleados/formEmpleados']">Nuevo empleado</button>
 </div>
 <div *ngIf="empleados?.length==0" class="alert alert-danger">
   No hay registros en la base de datos
@@ -37,7 +37,7 @@
             </button>
           </td>
           <td *ngIf="isJefe">
-            <button type="button" name="eliminar" (click)="eliminar(empleado)" class="btn btn-sm text-white" style="background: #990000;">
+            <button type="button" name="eliminar" (click)="eliminar(empleado)" class="btn btn-sm text-white fondoRojo">
               <i class="bi bi-trash-fill"></i>
               Eliminar
             </button>
